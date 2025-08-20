@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diabetes Prediction</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 28px;
+    }
+
+    .prediction-form .input-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .prediction-form label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #444;
+      gap: 8px;
+    }
+
+    .prediction-form input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .prediction-form input:focus {
+      border-color: #6c63ff;
+      box-shadow: 0 0 5px rgba(108, 99, 255, 0.4);
+    }
+
+    .submit-btn {
+      background: #6c63ff;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      background: #5848d9;
+    }
+
+    .result {
+      margin-top: 25px;
+      padding: 15px;
+      background: #f3f4ff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .result span {
+      font-weight: bold;
+      color: #6c63ff;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1><i class="fa-solid fa-heart-pulse"></i> Diabetes Prediction</h1>
+    <form action="/" method="POST" class="prediction-form">
+      <div class="input-group">
+        <label for="glucose"><i class="fa-solid fa-droplet"></i> Glucose</label>
+        <input type="text" id="glucose" name="glucose" placeholder="Enter glucose level">
+      </div>
+      
+      <div class="input-group">
+        <label for="bmi"><i class="fa-solid fa-weight-scale"></i> BMI</label>
+        <input type="text" id="bmi" name="bmi" placeholder="Enter BMI">
+      </div>
+      
+      <div class="input-group">
+        <label for="insulin"><i class="fa-solid fa-syringe"></i> Insulin</label>
+        <input type="text" id="insulin" name="insulin" placeholder="Enter insulin level">
+      </div>
+      
+      <div class="input-group">
+        <label for="age"><i class="fa-solid fa-user"></i> Age</label>
+        <input type="text" id="age" name="age" placeholder="Enter your age">
+      </div>
+
+      <button type="submit" class="submit-btn"><i class="fa-solid fa-magnifying-glass-chart"></i> Predict</button>
+    </form>
+
+    {% if prediction is not none %}
+      <div class="result">
+        <h3><i class="fa-solid fa-stethoscope"></i> Prediction: <span>{{ prediction }}</span></h3>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
